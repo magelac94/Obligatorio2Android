@@ -1,6 +1,5 @@
 package com.diegomedina.notesapp.data.service
 
-import com.diegomedina.notesapp.data.model.Note
 import com.diegomedina.notesapp.data.model.Pelicula
 import retrofit2.http.GET
 

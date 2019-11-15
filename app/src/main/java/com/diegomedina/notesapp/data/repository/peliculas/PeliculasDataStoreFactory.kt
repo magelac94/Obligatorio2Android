@@ -1,8 +1,7 @@
-package com.diegomedina.notesapp.data.repository.notes
 
 import com.diegomedina.notesapp.data.dao.PeliculaDao
 import com.diegomedina.notesapp.data.helper.networking.NetworkingManager
-import com.diegomedina.notesapp.data.service.NoteService
+import com.diegomedina.notesapp.data.repository.notes.PeliculasDataStore
 import com.diegomedina.notesapp.data.service.PeliculaService
 
 @Suppress("UNUSED_PARAMETER")
