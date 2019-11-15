@@ -11,7 +11,7 @@ open class NotesDataStoreFactory(
     var networkingManager: NetworkingManager
 ) {
 
-    open var notesDataStoreFactory: PeliculasDataStore
+    open var notesDataStoreFactory: NotesDataStore
         get() {
             return createDataSourceFactory()
         }
