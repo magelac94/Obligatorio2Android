@@ -30,9 +30,10 @@ class RetrofitController(
             .addInterceptor { chain ->
                 val response = chain.proceed(chain.request())
 
-                if (response.code == HttpURLConnection.HTTP_UNAUTHORIZED && accessToken != null) {
-                    App.goToLoginScreen()
-                }
+                response
+//                if (response.code == HttpURLConnection.HTTP_UNAUTHORIZED && accessToken != null) {
+//                    App.goToLoginScreen()
+//                }
 
                 response
             }
@@ -40,7 +41,7 @@ class RetrofitController(
                 if (accessToken != null) {
                     val request = chain.request()
                         .newBuilder()
-                        .addHeader("Authorization", accessToken ?: "")
+                        .addHeader("Authorization", accessToken ?: "" )
                         .build()
 
                     chain.proceed(request)

@@ -16,39 +16,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PeliculasFragment : Fragment() {
 
-//    private val adapter = PeliculasAdapter()
-//    private val peliculasViewModel: PeliculasViewModel by viewModel()
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View = inflater.inflate(R.layout.fragment_peliculas, container, false)
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        recyclerView?.apply {
-//            layoutManager = LinearLayoutManager(activity)
-//            adapter = this@PeliculasFragment.adapter
-//        }
-//
-//        peliculasViewModel.loadPeliculas()
-//        peliculasViewModel.peliculas.observe(viewLifecycleOwner, Observer(this::peliculasLoaded))
-//        peliculasViewModel.isLoading.observe(viewLifecycleOwner, Observer(this::loadingStateChanged))
-//    }
-//
-//    private fun peliculasLoaded(peliculas: List<Pelicula>) {
-//        adapter.peliculas = peliculas
-//    }
-//
-//    private fun loadingStateChanged(isLoading: Boolean) {
-//        progressBar.visibleIf(isLoading)
-//        recyclerView.visibleIf(!isLoading)
-//    }
+    private lateinit var adapter: GridAdapter
 
-    private lateinit var adapter: PeliculasAdapter
-    private val moviesViewModel: PeliculasViewModel by viewModel()
+    private val peliculasViewModel: PeliculasViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,48 +26,100 @@ class PeliculasFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        adapter = PeliculasAdapter()
+        adapter = GridAdapter(context!!)
 
         return inflater.inflate(R.layout.fragment_peliculas, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Init adapter
-        adapter = PeliculasAdapter()
-        //grid_movies.adapter = adapter
 
-        setupSearchBar()
-        moviesViewModel.loadPeliculas()
-        moviesViewModel.peliculas.observe(viewLifecycleOwner, Observer(this::moviesLoaded))
-        moviesViewModel.isLoading.observe(viewLifecycleOwner, Observer(this::loadingStateChanged))
-    }
+        // grid
+        grid_movies.adapter = adapter
 
-    private fun moviesLoaded(movies: List<Pelicula>) {
-        adapter.peliculas = movies
-    }
-
-    private fun loadingStateChanged(isLoading: Boolean) {
-//        progressBar.visibleIf(isLoading)
-//        movies_grid.visibleIf(!isLoading)
-    }
-
-    private fun setupSearchBar() {
+        // barra de busqueda
         bar_search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
-                moviesViewModel.searchPeliculas(newText)
+                peliculasViewModel.searchPeliculas(newText)
                 return false
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                moviesViewModel.searchPeliculas(query)
+                peliculasViewModel.searchPeliculas(query)
                 bar_search.clearFocus();
                 return false
             }
 
         })
+
+        peliculasViewModel.loadPeliculas()
+        peliculasViewModel.peliculas.observe(viewLifecycleOwner, Observer(this::peliculasLoaded))
+        peliculasViewModel.isLoading.observe(viewLifecycleOwner, Observer(this::loadingStateChanged))
+
     }
+
+    private fun peliculasLoaded(peliculas: List<Pelicula>) {
+        adapter.listapeliculas = peliculas
+    }
+
+    private fun loadingStateChanged(isLoading: Boolean) {
+//        progressBar.visibleIf(isLoading)
+//        recyclerView.visibleIf(!isLoading)
+    }
+
+//    private lateinit var adapter: PeliculasAdapter
+//    private val moviesViewModel: PeliculasViewModel by viewModel()
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//
+//        adapter = PeliculasAdapter()
+//
+//        return inflater.inflate(R.layout.fragment_peliculas, container, false)
+//
+//    }
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        // Init adapter
+//        adapter = PeliculasAdapter()
+//        //grid_movies.adapter = adapter
+//
+//        setupSearchBar()
+//        moviesViewModel.loadPeliculas()
+//        moviesViewModel.peliculas.observe(viewLifecycleOwner, Observer(this::moviesLoaded))
+//        moviesViewModel.isLoading.observe(viewLifecycleOwner, Observer(this::loadingStateChanged))
+//    }
+//
+//    private fun moviesLoaded(movies: List<Pelicula>) {
+//        adapter.peliculas = movies
+//    }
+//
+//    private fun loadingStateChanged(isLoading: Boolean) {
+////        progressBar.visibleIf(isLoading)
+////        movies_grid.visibleIf(!isLoading)
+//    }
+//
+//    private fun setupSearchBar() {
+//        bar_search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//
+//            override fun onQueryTextChange(newText: String): Boolean {
+//                moviesViewModel.searchPeliculas(newText)
+//                return false
+//            }
+//
+//            override fun onQueryTextSubmit(query: String): Boolean {
+//                moviesViewModel.searchPeliculas(query)
+//                bar_search.clearFocus();
+//                return false
+//            }
+//
+//        })
+//    }
 }
