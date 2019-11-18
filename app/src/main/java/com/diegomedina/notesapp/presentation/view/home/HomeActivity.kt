@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.diegomedina.notesapp.R
-import com.diegomedina.notesapp.presentation.view.home.notes.NotesFragment
-import com.diegomedina.notesapp.presentation.view.home.profile.ProfileFragment
+import com.diegomedina.notesapp.presentation.view.home.peliculas.PeliculasFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -13,13 +12,13 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        showFragment(NotesFragment(), NotesFragmentTag)
+        showFragment(PeliculasFragment(), PeliculasFragmentTag)
         bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             removeActiveFragment()
 
             when (menuItem.itemId) {
-                R.id.notes -> showFragment(NotesFragment(), NotesFragmentTag)
-                R.id.profile -> showFragment(ProfileFragment(), ProfileFragmentTag)
+                R.id.notes -> showFragment(PeliculasFragment(), PeliculasFragmentTag)
+               // R.id.profile -> showFragment(ProfileFragment(), ProfileFragmentTag)
             }
 
             true
@@ -27,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun removeActiveFragment() {
-        listOf(NotesFragmentTag, ProfileFragmentTag).forEach { tag ->
+        listOf(PeliculasFragmentTag, ProfileFragmentTag).forEach { tag ->
             val fragment = supportFragmentManager.findFragmentByTag(tag)
             fragment?.let {
                 supportFragmentManager
@@ -46,7 +45,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val NotesFragmentTag = "NotesFragmentTag"
+        private const val PeliculasFragmentTag = "PeliculasFragmentTag"
         private const val ProfileFragmentTag = "ProfileFragmentTag"
     }
 }

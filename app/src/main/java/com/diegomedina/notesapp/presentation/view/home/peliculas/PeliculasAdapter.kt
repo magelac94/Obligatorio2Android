@@ -1,18 +1,19 @@
-package com.diegomedina.notesapp.presentation.view.home.notes
+package com.diegomedina.notesapp.presentation.view.home.peliculas
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.diegomedina.notesapp.R
-import com.diegomedina.notesapp.data.model.Note
+import com.diegomedina.notesapp.data.model.Pelicula
 import kotlinx.android.synthetic.main.view_note.view.*
+import kotlinx.android.synthetic.main.view_pelicula.view.*
 import org.threeten.bp.format.DateTimeFormatter
 
-class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
-    var notes = listOf<Note>()
+class PeliculasAdapter : RecyclerView.Adapter<PeliculasAdapter.PeliculaViewHolder>() {
+    var peliculas = listOf<Pelicula>()
         set(value) {
-            field = value.sortedByDescending { it.createdAt }
+            field = value.sortedByDescending { it.raiting }
             notifyDataSetChanged()
         }
 
@@ -25,21 +26,21 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         LayoutInflater.from(parent.context)
-            .inflate(R.layout.view_note, parent, false)
-            .let { view -> NoteViewHolder(view) }
+            .inflate(R.layout.view_pelicula, parent, false)
+            .let { view -> PeliculaViewHolder(view) }
 
-    override fun getItemCount() = notes.size
+    override fun getItemCount() = peliculas.size
 
-    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        holder.bind(notes[position])
+    override fun onBindViewHolder(holder: PeliculaViewHolder, position: Int) {
+        holder.bind(peliculas[position])
     }
 
-    inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(note: Note) {
-            itemView.contentTextView.text = note.toString()
-            itemView.dateTextView.text = DateTimeFormatter
-                .ofPattern("dd MMMM, yyyy")
-                .format(note.createdAt)
+    inner class PeliculaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(pelicula: Pelicula) {
+//            itemView.contentTextView.text = pelicula.toString()
+//            itemView.dateTextView.text = DateTimeFormatter
+//                .ofPattern("dd MMMM, yyyy")
+//                .format(pelicula.raiting)
         }
     }
 }
