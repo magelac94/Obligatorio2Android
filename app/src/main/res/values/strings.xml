@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">NotesApp</string>
+    <string name="app_name">MovieApp</string>
     <string name="log_in">Log in</string>
     <string name="password">Password</string>
-    <string name="notes">Notes</string>
+    <string name="notes">Movies</string>
     <string name="profile">Profile</string>
+    <string name="favorites">Favorites</string>
     <string name="log_out">Log out</string>
     <string name="service_error">The credentials are not valid</string>
     <string name="search">Search</string>

@@ -11,15 +11,10 @@ import com.diegomedina.notesapp.R
 import com.diegomedina.notesapp.data.model.Pelicula
 
 
-
 class GridAdapter: BaseAdapter {
     var context:Context
 
     var listapeliculas = listOf<Pelicula>()
-        set(value) {
-            field = value.sortedByDescending { it.raiting }
-            notifyDataSetChanged()
-        }
 
 
     constructor(context: Context): super() {
@@ -44,6 +39,9 @@ class GridAdapter: BaseAdapter {
         var convertView = layoutInflater.inflate(R.layout.view_pelicula, null)
 
         convertView.text1.text = listapeliculas[position].titulo
+
+        println("GET VIEW ------------------------ ????????????????")
+        println(listapeliculas[position].titulo)
 
        return convertView
     }
