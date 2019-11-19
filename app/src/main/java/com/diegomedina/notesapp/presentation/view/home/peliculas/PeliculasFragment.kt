@@ -11,7 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.diegomedina.notesapp.R
 import com.diegomedina.notesapp.data.model.Pelicula
 import com.diegomedina.notesapp.presentation.helper.visibleIf
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_peliculas.*
+import kotlinx.android.synthetic.main.view_pelicula.*
+import kotlinx.android.synthetic.main.view_pelicula.view.*
+import kotlinx.android.synthetic.main.view_pelicula.view.image_peli
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PeliculasFragment : Fragment() {
@@ -34,6 +38,11 @@ class PeliculasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Picasso.get()
+            .load("https://www.sccpre.cat/maxp/iTbwoob/")
+            .resize(50, 50)
+            .centerCrop()
+            .into(icon_app)
 
         // grid
         grid_movies.adapter = adapter

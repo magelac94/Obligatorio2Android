@@ -1,4 +1,3 @@
-package com.diegomedina.notesapp.presentation.view.home.peliculas
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,7 @@ import org.threeten.bp.format.DateTimeFormatter
 class PeliculasAdapter : RecyclerView.Adapter<PeliculasAdapter.PeliculaViewHolder>() {
     var peliculas = listOf<Pelicula>()
         set(value) {
-            field = value.sortedByDescending { it.raiting }
+            field = value
             notifyDataSetChanged()
         }
 

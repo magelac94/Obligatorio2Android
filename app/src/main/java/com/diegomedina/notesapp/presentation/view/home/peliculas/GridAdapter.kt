@@ -9,6 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.diegomedina.notesapp.R
 import com.diegomedina.notesapp.data.model.Pelicula
+import com.squareup.picasso.Picasso
 
 
 class GridAdapter: BaseAdapter {
@@ -35,17 +36,28 @@ class GridAdapter: BaseAdapter {
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+
+        //mostrar en pantalla
+
         var layoutInflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         var convertView = layoutInflater.inflate(R.layout.view_pelicula, null)
 
-        convertView.text1.text = listapeliculas[position].titulo
+        //titulo de la pelicula
+        convertView.titulo_peli.text = listapeliculas[position].title
+        println(listapeliculas[position].title)
 
-        println("GET VIEW ------------------------ ????????????????")
-        println(listapeliculas[position].titulo)
+        // imagen de la pelicula
+        var url_image = listapeliculas[position].posterPath
+
+       Picasso.get() //lib para uso imagenes por url
+           .load(url_image)
+           .resize(50, 50)
+           .centerCrop()
+           .into(convertView.image_peli)
 
        return convertView
     }
 
 
-    // Guia: https://www.youtube.com/watch?v=DOXBg1HwXcI
+    // Guia Adapter para Grid: https://www.youtube.com/watch?v=DOXBg1HwXcI
 }
